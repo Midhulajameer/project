@@ -37,6 +37,15 @@ class employee_manager(DbConnect):
         self.connect.commit()
         print("New employee added")
 
+    def retrieve(self, id=None):
+        self.connect= super().get_connection()
+        self.cursor= self.connect.cursor()
+        query= "select * FROM employee WHERE id = %s"
+        values=(id,)
+        self.cursor.execute(query,values)
+        record=self.cursor.fetchone()
+        print(record)
+
 
 connection_istance = DbConnect()
 connection_istance.get_connection()
